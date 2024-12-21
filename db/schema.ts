@@ -112,6 +112,19 @@ const schemas = appSchema({
         { name: 'date_updated', type: 'number' },
       ],
     }),
+    tableSchema({
+      name: 'return_products',
+      columns: [
+        { name: 'product_id', type: 'string', isIndexed: true },
+        { name: 'supplier_id', type: 'string', isIndexed: true },
+        { name: 'qty', type: 'number' },
+        { name: 'return_date', type: 'number' },
+        { name: 'reason', type: 'string', isOptional: true },
+        { name: 'date_added', type: 'number' },
+        { name: 'date_updated', type: 'number' },
+      ],
+    })
+    
   ],
 });
 

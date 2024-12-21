@@ -1,11 +1,10 @@
 import { Model } from '@nozbe/watermelondb';
-import { field, date, children, relation } from '@nozbe/watermelondb/decorators';
-import bcrypt from 'bcryptjs'; // For password hashing in User model
-import Category  from './category';
+import { field, date, relation, children } from '@nozbe/watermelondb/decorators';
+import Category from './category';
+import InventoryTransaction from './transaction';
+import ReturnProduct from './return';
+import SaleItem from './item';
 
-
-
-// Product model
 export default class Product extends Model {
   static table = 'products';
 
@@ -20,6 +19,10 @@ export default class Product extends Model {
   @date('date_added') dateAdded!: Date;
   @date('date_updated') dateUpdated!: Date;
   @field('quantity') quantity!: number;
+
+  @children('inventory_transactions') inventoryTransactions!: InventoryTransaction[];
+  @children('return_products') returnProducts!: ReturnProduct[];
+  @children('sales_items') saleItems!: SaleItem[];
 }
 
 

@@ -3,15 +3,14 @@ import { field, date, relation } from '@nozbe/watermelondb/decorators';
 import Product from './product';
 import Supplier from './supplier';
 
-export default class PurchaseProduct extends Model {
-  static table = 'purchase_products';
+export default class ReturnProduct extends Model {
+  static table = 'return_products';
 
-  @relation('suppliers', 'supplier_id') supplier!: Supplier;
   @relation('products', 'product_id') product!: Product;
-  @field('cost') cost!: number;
+  @relation('suppliers', 'supplier_id') supplier!: Supplier;
   @field('qty') qty!: number;
-  @field('tax_rate') taxRate!: number;
-  @field('total') total!: number;
+  @date('return_date') returnDate!: Date;
+  @field('reason') reason!: string;
   @date('date_added') dateAdded!: Date;
   @date('date_updated') dateUpdated!: Date;
 }

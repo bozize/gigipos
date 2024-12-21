@@ -1,8 +1,7 @@
 import { Model } from '@nozbe/watermelondb';
-import { field, date, children, relation } from '@nozbe/watermelondb/decorators';
-import bcrypt from 'bcryptjs'; // For password hashing in User model
+import { field, date } from '@nozbe/watermelondb/decorators';
+import bcrypt from 'bcryptjs';
 
-// User model
 export default class User extends Model {
   static table = 'users';
 
@@ -19,3 +18,4 @@ export default class User extends Model {
     });
   }
 }
+

@@ -18,12 +18,16 @@ export default class Product extends Model {
   @field('tax_rate') taxRate!: number;
   @date('date_added') dateAdded!: Date;
   @date('date_updated') dateUpdated!: Date;
-  @field('quantity') quantity!: number;
+  @field('base_quantity') baseQuantity!: number;
+  @field('conversion_factor') conversionFactor!: number;
+  @field('default_unit') defaultUnit!: string;
+  @field('base_unit') baseUnit!: string;
 
   @children('inventory_transactions') inventoryTransactions!: InventoryTransaction[];
   @children('return_products') returnProducts!: ReturnProduct[];
   @children('sales_items') saleItems!: SaleItem[];
 }
+
 
 
 

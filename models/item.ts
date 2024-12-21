@@ -1,7 +1,7 @@
 import { Model } from '@nozbe/watermelondb';
 import { field, relation } from '@nozbe/watermelondb/decorators';
-import Sale from './sale';
 import Product from './product';
+import Sale from './sale';
 
 export default class SaleItem extends Model {
   static table = 'sales_items';
@@ -12,4 +12,5 @@ export default class SaleItem extends Model {
   @field('qty') qty!: number;
   @field('discount') discount!: number;
   @field('total') total!: number;
+  @field('unit_type') unitType!: string; // Tracks unit type (default or base)
 }

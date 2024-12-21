@@ -16,6 +16,7 @@ import Sale from '../models/sale';
 import Payment from '../models/payment';
 import SaleItem from '../models/item';
 import ReturnProduct from '../models/return';
+import Expense from '../models/expense';
 
 // Set custom UUID generator
 setGenerator(() => Crypto.randomUUID());
@@ -43,6 +44,7 @@ const database = new Database({
     Payment,
     SaleItem,
     ReturnProduct,
+    Expense,
   ],
 });
 
@@ -61,3 +63,4 @@ export const salesCollection = database.get<Sale>('sales');
 export const paymentsCollection = database.get<Payment>('payments');
 export const salesItemsCollection = database.get<SaleItem>('sales_items');
 export const ReturnProductCollection = database.get<ReturnProduct>('returns_products');
+export const ExpenseCollection = database.get<Expense>('expense');

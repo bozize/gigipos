@@ -17,8 +17,8 @@ const schemas = appSchema({
     tableSchema({
       name: 'products',
       columns: [
-        { name: 'code', type: 'string', isIndexed: true }, // Added index for better search performance
-        { name: 'category_id', type: 'string', isIndexed: true }, // Index foreign key
+        { name: 'code', type: 'string', isIndexed: true },
+        { name: 'category_id', type: 'string', isIndexed: true },
         { name: 'name', type: 'string' },
         { name: 'description', type: 'string', isOptional: true },
         { name: 'price', type: 'number' },
@@ -27,7 +27,19 @@ const schemas = appSchema({
         { name: 'tax_rate', type: 'number' },
         { name: 'date_added', type: 'number' },
         { name: 'date_updated', type: 'number' },
-        { name: 'quantity', type: 'number' },
+        { name: 'base_quantity', type: 'number' }, // Smallest unit stock
+        { name: 'conversion_factor', type: 'number' }, // Conversion factor to base unit
+        { name: 'default_unit', type: 'string', isOptional: true }, // Larger unit
+        { name: 'base_unit', type: 'string', isOptional: true }, // Smallest measurable unit
+      ],
+    }),
+    tableSchema({
+      name: 'expenses',
+      columns: [
+        { name: 'amount', type: 'number' },
+        { name: 'purpose', type: 'string' },
+        { name: 'created_by', type: 'string', isIndexed: true }, // Linked to user role
+        { name: 'date_added', type: 'number' },
       ],
     }),
     tableSchema({
@@ -52,14 +64,18 @@ const schemas = appSchema({
     tableSchema({
       name: 'purchase_products',
       columns: [
-        { name: 'supplier_id', type: 'string', isIndexed: true }, // Optional foreign key with index
-        { name: 'product_id', type: 'string', isIndexed: true }, // Optional foreign key with index
+        { name: 'supplier_id', type: 'string', isIndexed: true },
+        { name: 'product_id', type: 'string', isIndexed: true },
         { name: 'cost', type: 'number' },
         { name: 'qty', type: 'number' },
         { name: 'tax_rate', type: 'number' },
         { name: 'total', type: 'number' },
         { name: 'date_added', type: 'number' },
         { name: 'date_updated', type: 'number' },
+        { name: 'base_quantity', type: 'number' }, // Base unit quantity derived from qty and conversion_factor
+        { name: 'conversion_factor', type: 'number' }, // Conversion factor for purchase
+        { name: 'default_unit', type: 'string', isOptional: true },
+        { name: 'base_unit', type: 'string', isOptional: true },
       ],
     }),
     tableSchema({
@@ -99,6 +115,7 @@ const schemas = appSchema({
         { name: 'qty', type: 'number' },
         { name: 'discount', type: 'number' },
         { name: 'total', type: 'number' },
+        { name: 'unit_type', type: 'string' }, // Tracks whether sold in base or default units
       ],
     }),
     tableSchema({
@@ -107,7 +124,8 @@ const schemas = appSchema({
         { name: 'username', type: 'string', isIndexed: true },
         { name: 'email', type: 'string', isIndexed: true },
         { name: 'password', type: 'string' }, // Ensure encryption in the application layer
-        { name: 'role', type: 'string' }, // Consider using enums for roles
+        { name: 'role', type: 'string' },
+        { name: 'pin', type: 'string' },
         { name: 'date_added', type: 'number' },
         { name: 'date_updated', type: 'number' },
       ],

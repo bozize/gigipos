@@ -6,11 +6,18 @@ import Sale from './sale';
 export default class SaleItem extends Model {
   static table = 'sales_items';
 
+  static associations = {
+    sales: { type: 'belongs_to' as const, key: 'sale_id' },
+    products: { type: 'belongs_to' as const, key: 'product_id' },
+  };
+
   @relation('sales', 'sale_id') sale!: Sale;
   @relation('products', 'product_id') product!: Product;
   @field('price') price!: number;
   @field('qty') qty!: number;
-  @field('discount') discount!: number;
-  @field('total') total!: number;
-  @field('unit_type') unitType!: string; // Tracks unit type (default or base)
+  @field('unit_type') unitType!: string;
+  @field('tax_amount') taxAmount!: number;
+  @field('total_amount') totalAmount!: number;
 }
+
+

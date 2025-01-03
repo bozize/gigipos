@@ -2,12 +2,17 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
-    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "module": "esnext",
+    "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      "@/*": ["./*"],
+      "*": ["*", "*.ios", "*.android"]
+    },
+    "experimentalDecorators": true
   },
   "include": [
     "**/*.ts",
@@ -16,5 +21,7 @@
     "expo-env.d.ts"
   ]
 }
+
+
 
 
